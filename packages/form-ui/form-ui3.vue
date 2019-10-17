@@ -164,20 +164,6 @@
                                    :data="initItem.init.data" :disabled="initItem.disabled" :show="initItem.init.show"
                     ></AutoComplete2>
 
-                    <!--action选择器-->
-                    <!--<actionSelector v-if="initItem.type=='actionSelector'" v-model="FormUI_items[index][indexItem]"-->
-                    <!--:title="initItem.title" :open="initItem.open">-->
-                    <!--</actionSelector>-->
-
-                    <!--keyList配置器 此配置有非常强的业务耦合，只适合于特殊业务-->
-                    <!--<KeyList v-if="initItem.type=='business_keyList'"-->
-                    <!--v-model="FormUI_items[index][indexItem]"></KeyList>-->
-
-                    <!--ComicSelector漫画选择器，用来筛选漫画-->
-                    <!--<ComicSelector v-if="initItem.type=='comicSelector'"-->
-                    <!--v-model="FormUI_items[index][indexItem]"-->
-                    <!--:singleSelect="initItem.singleSelect"></ComicSelector>-->
-
                     <FormUIBusiness :type="initItem.type" :allData="FormUI_items[index][indexItem]"
                                     :index="index"
                                     :indexItem="indexItem"
