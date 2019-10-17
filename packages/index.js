@@ -1,5 +1,4 @@
 //通用的架构性组件
-import TableUI from './table-ui-plus/table-ui2.vue';
 import TableUIPlus from './table-ui-plus/table-ui-plus5.vue';
 import FormUI from './form-ui/form-ui3.vue';
 import SelectorUI from './selector-ui/selector-ui2.vue';
@@ -18,7 +17,6 @@ export default {
         //组件库的基础导入
         Vue.mixin({
             components: {
-                TableUI,
                 TableUIPlus,
                 FormUI,
                 SelectorUI,

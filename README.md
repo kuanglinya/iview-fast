@@ -1,6 +1,9 @@
 # iview-fast
 
+项目地址：https://git.code.tencent.com/xiaosi/iview-fast
+
 ## Project setup
+
 ```
 npm install
 ```

@@ -182,7 +182,6 @@
 
 <script>
     //组件，需要单独引用
-    import picUploader from './components/picUploader.vue';
     import importUploader from './components/importUploader.vue';
     import tagsInput from './components/tagsInput.vue';
     import DatePicker2 from './components/datePicker2.vue';
@@ -190,10 +189,8 @@
     import imgUploader from './components/imgUploader.vue';
     import numberInput from './components/numberInput.vue';
 
-
     export default {
         components: {
-            picUploader,
             importUploader,
             tagsInput,
             DatePicker2,

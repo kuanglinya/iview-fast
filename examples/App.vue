@@ -101,7 +101,6 @@
             get_index: function () {
                 const self = this;
                 self.TableUI_base_loading = true;
-                debugger;
                 this.ajax({
                     url: '/VersionManage/ChannelManage/index',
                     method: 'post',
@@ -115,7 +114,6 @@
                         page_size: this.TableUI_base_page.pageSize
                     }
                 }).then(function (res) {
-                    debugger;
                     self.TableUI_base_loading = false;
                     if (res.data) {
                         self.TableUI_base_list = res.data.list;

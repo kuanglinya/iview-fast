@@ -1,6 +1,6 @@
 {
   "name": "iview-fast",
-  "version": "0.2.2",
+  "version": "0.2.5",
   "private": false,
   "description": "基于iVIew封装的快速生成基础后台管理页面的组件",
   "main": "lib/iview-fast.umd.min.js",
@@ -14,8 +14,8 @@
   },
   "dependencies": {
     "core-js": "^2.6.5",
-    "iview": "^3.4.2",
     "resize-observer-polyfill": "^1.5.1",
+    "view-design": "^4.0.1",
     "vue": "^2.6.10",
     "vue-router": "^3.0.3"
   },

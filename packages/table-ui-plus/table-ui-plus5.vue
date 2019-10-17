@@ -79,7 +79,7 @@
                 <div>
                     <Card class="box-card">
                         <Button type="warning" @click="onButtonShowDrawer" icon="md-list">表头筛选</Button>
-                        <Button type="warning" @click="onButtonChangeFullScreen">
+                        <Button type="warning" @click="onButtonChangeFullScreen" style="margin-left: 6px;">
                             <Icon v-if="!fullScreenStatus" type="md-expand" size="18"/>
                             <Icon v-else type="md-contract" size="18"/>
                         </Button>

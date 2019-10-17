@@ -1,10 +1,21 @@
+<style lang="scss" scoped>
+    .flex-box {
+        display: flex;
+        align-items: center;
+    }
+
+    .flex-right {
+        padding-top: 10px;
+    }
+</style>
+
 <template>
     <div class="page-editDemo-form-Line" :style="Div_width" data-ui-name="selector-ui">
         <!--循环formInit用来初始化整个表单内容，此表单默认为多个form和多个formItem的组合-->
         <div class="flex-box">
             <div class="flex-left">
                 <Button @click="openDrawer" type="warning" icon="md-list">高级筛选</Button>
-                <Button @click="clearLocalStorage" type="warning" icon="md-build"></Button>
+                <Button @click="clearLocalStorage" style="margin-left: 6px;" type="warning" icon="md-build"></Button>
             </div>
             <Divider type="vertical"></Divider>
             <div class="flex-right">
@@ -93,13 +104,3 @@
     }
 </script>
 
-<style lang="scss" scoped>
-    .flex-box {
-        display: flex;
-        align-items: center;
-    }
-
-    .flex-right {
-        padding-top: 10px;
-    }
-</style>
