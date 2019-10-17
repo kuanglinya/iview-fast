@@ -22,153 +22,159 @@
             <!--循环formInit用来初始化整个表单内容，此表单默认为多个form和多个formItem的组合-->
             <Form :model="FormUI_items" v-for="(item,index) in FormUI_init"
                   :label-width="(FormUI_modal.labelWidth||100)"
-                  :key="index" v-if="FormUI_modal.showFormId == item.formId" :style="{'word-break': 'break-all'}">
+                  :key="index" :style="{'word-break': 'break-all'}">
 
-                <FormItem :label="initItem.label" v-for="(initItem , indexItem) in item.init"
-                          :key="index+'_'+indexItem" :prop="index+'.'+indexItem"
-                          :rules="initItem.rule">
+                <template v-if="FormUI_modal.showFormId == item.formId">
+                    <FormItem :label="initItem.label" v-for="(initItem , indexItem) in item.init"
+                              :key="index+'_'+indexItem" :prop="index+'.'+indexItem"
+                              :rules="initItem.rule">
 
-                    <!--单纯的字符串-->
-                    <strong style="word-break: break-all;" v-if="initItem.type=='text'">{{FormUI_items[index][indexItem]}}</strong>
+                        <!--单纯的字符串-->
+                        <strong style="word-break: break-all;" v-if="initItem.type=='text'">{{FormUI_items[index][indexItem]}}</strong>
 
-                    <!--文本输入框-->
-                    <Input v-model="FormUI_items[index][indexItem]" v-if="initItem.type=='input'"
-                           :placeholder="initItem.init" :disabled="initItem.isDisabled"/>
+                        <!--文本输入框-->
+                        <Input v-model="FormUI_items[index][indexItem]" v-if="initItem.type=='input'"
+                               :placeholder="initItem.init" :disabled="initItem.isDisabled"/>
 
-                    <!--数字输入-->
-                    <numberInput v-if="initItem.type=='number'"
-                                 v-model="FormUI_items[index][indexItem]"
-                                 :disabled="initItem.isDisabled"
-                                 :placeholder="initItem.init.placeholder"
-                                 :max="initItem.init.max"
-                                 :min="initItem.init.min"
-                                 :step="initItem.init.step"
-                                 :defaultValue="initItem.init.defaultValue"
-                                 :editable="initItem.init.editable"
-                    ></numberInput>
+                        <!--数字输入-->
+                        <numberInput v-if="initItem.type=='number'"
+                                     v-model="FormUI_items[index][indexItem]"
+                                     :disabled="initItem.isDisabled"
+                                     :placeholder="initItem.init.placeholder"
+                                     :max="initItem.init.max"
+                                     :min="initItem.init.min"
+                                     :step="initItem.init.step"
+                                     :defaultValue="initItem.init.defaultValue"
+                                     :editable="initItem.init.editable"
+                        ></numberInput>
 
-                    <!--屏蔽类型的文本输入框-->
-                    <Input v-model="FormUI_items[index][indexItem]" v-if="initItem.type=='disabled'" disabled/>
+                        <!--屏蔽类型的文本输入框-->
+                        <Input v-model="FormUI_items[index][indexItem]" v-if="initItem.type=='disabled'" disabled/>
 
-                    <!--搜索框类型-->
-                    <Input search enter-button v-model="FormUI_items[index][indexItem]" v-if="initItem.type=='search'"
-                           :placeholder="initItem.init" :disabled="initItem.isDisabled"/>
+                        <!--搜索框类型-->
+                        <Input search enter-button v-model="FormUI_items[index][indexItem]"
+                               v-if="initItem.type=='search'"
+                               :placeholder="initItem.init" :disabled="initItem.isDisabled"/>
 
-                    <!--密码类型-->
-                    <Input v-model="FormUI_items[index][indexItem]" v-if="initItem.type=='password'" type="password"
-                           :placeholder="initItem.init" :disabled="initItem.isDisabled"
-                           icon="ios-eye-off-outline"/>
+                        <!--密码类型-->
+                        <Input v-model="FormUI_items[index][indexItem]" v-if="initItem.type=='password'" type="password"
+                               :placeholder="initItem.init" :disabled="initItem.isDisabled"
+                               icon="ios-eye-off-outline"/>
 
-                    <!--选择器类型-->
-                    <Select v-model="FormUI_items[index][indexItem]" v-if="initItem.type=='select'"
-                            :placeholder="FormUI_items[index][indexItem+'_label']" :disabled="initItem.isDisabled"
-                            :clearable='initItem.clearable' :multiple="initItem.multiple"
-                            :filterable="initItem.filterable">
-                        <Option :value="domItem.value" v-for="(domItem,domIndex) in initItem.init"
-                                :key="index+'_'+indexItem+'_'+domIndex">{{domItem.label}}
-                        </Option>
-                    </Select>
+                        <!--选择器类型-->
+                        <Select v-model="FormUI_items[index][indexItem]" v-if="initItem.type=='select'"
+                                :placeholder="FormUI_items[index][indexItem+'_label']" :disabled="initItem.isDisabled"
+                                :clearable='initItem.clearable' :multiple="initItem.multiple"
+                                :filterable="initItem.filterable">
+                            <Option :value="domItem.value" v-for="(domItem,domIndex) in initItem.init"
+                                    :key="index+'_'+indexItem+'_'+domIndex">{{domItem.label}}
+                            </Option>
+                        </Select>
 
-                    <!--开关-->
-                    <i-switch v-model="FormUI_items[index][indexItem]" v-if="initItem.type=='switch'"
-                              :true-value="initItem.init.openValue" :false-value="initItem.init.closeValue"
-                              :disabled="initItem.isDisabled" size="large">
-                        <span slot="open">{{initItem.init.openText?initItem.init.openText:'开'}}</span>
-                        <span slot="close">{{initItem.init.closeText?initItem.init.closeText:'关'}}</span>
-                    </i-switch>
+                        <!--开关-->
+                        <i-switch v-model="FormUI_items[index][indexItem]" v-if="initItem.type=='switch'"
+                                  :true-value="initItem.init.openValue" :false-value="initItem.init.closeValue"
+                                  :disabled="initItem.isDisabled" size="large">
+                            <span slot="open">{{initItem.init.openText?initItem.init.openText:'开'}}</span>
+                            <span slot="close">{{initItem.init.closeText?initItem.init.closeText:'关'}}</span>
+                        </i-switch>
 
-                    <!--单选框-->
-                    <RadioGroup v-model="FormUI_items[index][indexItem]" v-if="initItem.type=='radio'">
-                        <Radio :label="domItem.value" v-for="(domItem,domIndex) in initItem.init"
-                               :disabled="initItem.isDisabled"
-                               :key="index+'_'+indexItem+'_'+domIndex">{{domItem.label}}
-                        </Radio>
-                    </RadioGroup>
+                        <!--单选框-->
+                        <RadioGroup v-model="FormUI_items[index][indexItem]" v-if="initItem.type=='radio'">
+                            <Radio :label="domItem.value" v-for="(domItem,domIndex) in initItem.init"
+                                   :disabled="initItem.isDisabled"
+                                   :key="index+'_'+indexItem+'_'+domIndex">{{domItem.label}}
+                            </Radio>
+                        </RadioGroup>
 
-                    <!--多选框-->
-                    <CheckboxGroup v-model="FormUI_items[index][indexItem]" v-if="initItem.type=='checkbox'">
-                        <Checkbox :label="domItem.value" v-for="(domItem,domIndex) in initItem.init"
-                                  :key="index+'_'+indexItem+'_'+domIndex" :disabled='domItem.isDisabled'>
-                            {{domItem.label}}
-                        </Checkbox>
-                    </CheckboxGroup>
+                        <!--多选框-->
+                        <CheckboxGroup v-model="FormUI_items[index][indexItem]" v-if="initItem.type=='checkbox'">
+                            <Checkbox :label="domItem.value" v-for="(domItem,domIndex) in initItem.init"
+                                      :key="index+'_'+indexItem+'_'+domIndex" :disabled='domItem.isDisabled'>
+                                {{domItem.label}}
+                            </Checkbox>
+                        </CheckboxGroup>
 
-                    <!--文本输入区域-->
-                    <Input v-model="FormUI_items[index][indexItem]" v-if="initItem.type=='textarea'" type="textarea"
-                           :autosize="initItem.init"
-                           :placeholder="initItem.placeholder" :disabled="initItem.isDisabled"/>
+                        <!--文本输入区域-->
+                        <Input v-model="FormUI_items[index][indexItem]" v-if="initItem.type=='textarea'" type="textarea"
+                               :autosize="initItem.init"
+                               :placeholder="initItem.placeholder" :disabled="initItem.isDisabled"/>
 
-                    <!--级联选择器-->
-                    <Cascader :data="initItem.init" v-model="FormUI_items[index][indexItem]"
-                              v-if="initItem.type=='cascader'"></Cascader>
+                        <!--级联选择器-->
+                        <Cascader :data="initItem.init" v-model="FormUI_items[index][indexItem]"
+                                  v-if="initItem.type=='cascader'"></Cascader>
 
-                    <!--图片上传-->
-                    <picUploader :payload="initItem.init" v-model="FormUI_items[index][indexItem]"
-                                 v-if="initItem.type=='picUploader'"></picUploader>
+                        <!--图片上传-->
+                        <picUploader :payload="initItem.init" v-model="FormUI_items[index][indexItem]"
+                                     v-if="initItem.type=='picUploader'"></picUploader>
 
-                    <!--图片上传弱限制版-->
-                    <imgUploader v-model="FormUI_items[index][indexItem]"
-                                 v-if="initItem.type=='imgUploader'" :limit-width="initItem.imgLimitWidth"
-                                 :limit-height="initItem.imgLimitHeight"></imgUploader>
+                        <!--图片上传弱限制版-->
+                        <imgUploader v-model="FormUI_items[index][indexItem]"
+                                     v-if="initItem.type=='imgUploader'" :limit-width="initItem.imgLimitWidth"
+                                     :limit-height="initItem.imgLimitHeight"></imgUploader>
 
-                    <!--单个按钮类型-->
-                    <Button :type="initItem.init.type" :class="initItem.init.className" :id="initItem.init.id"
-                            v-if="initItem.type=='button'"
-                            @click="formButtonClick(initItem.init)">
-                        {{initItem.init.label}}
-                    </Button>
-
-                    <!--时间选择器,重新复写，强制只传递时间戳参数-->
-                    <DatePicker2 :placeholder="initItem.init.label||initItem.init" :unit="initItem.init.unit"
-                                 v-model="FormUI_items[index][indexItem]"
-                                 v-if="initItem.type=='datePicker'"></DatePicker2>
-
-                    <!--多个按钮组合类型-->
-                    <ButtonGroup v-if="initItem.type=='buttonGround'">
-                        <Button :type="buttonItem.type" :class="buttonItem.className" :id="buttonItem.id"
-                                @click="formButtonClick(buttonItem)" v-for="(buttonItem,buttonIndex) in initItem.init"
-                                :key="index+'_'+indexItem+'_'+buttonIndex"
-                                style="margin-right: 8px;">
-                            {{buttonItem.label}}
+                        <!--单个按钮类型-->
+                        <Button :type="initItem.init.type" :class="initItem.init.className" :id="initItem.init.id"
+                                v-if="initItem.type=='button'"
+                                @click="formButtonClick(initItem.init)">
+                            {{initItem.init.label}}
                         </Button>
-                    </ButtonGroup>
 
-                    <!--单纯上传文件-->
-                    <input type="file" v-if="initItem.type=='file'" @change="processFile($event,index,indexItem)"/>
+                        <!--时间选择器,重新复写，强制只传递时间戳参数-->
+                        <DatePicker2 :placeholder="initItem.init.label||initItem.init" :unit="initItem.init.unit"
+                                     v-model="FormUI_items[index][indexItem]"
+                                     v-if="initItem.type=='datePicker'"></DatePicker2>
 
-                    <!--导入型文件上传 Excel，txt，PDF支持，详细对接人：jadenzhang-->
-                    <importUploader v-if="initItem.type=='importUploader'" :text="initItem.init"
-                                    v-model="FormUI_items[index][indexItem]" :url="initItem.url"
-                                    :list.sync="initItem.list">
-                    </importUploader>
+                        <!--多个按钮组合类型-->
+                        <ButtonGroup v-if="initItem.type=='buttonGround'">
+                            <Button :type="buttonItem.type" :class="buttonItem.className" :id="buttonItem.id"
+                                    @click="formButtonClick(buttonItem)"
+                                    v-for="(buttonItem,buttonIndex) in initItem.init"
+                                    :key="index+'_'+indexItem+'_'+buttonIndex"
+                                    style="margin-right: 8px;">
+                                {{buttonItem.label}}
+                            </Button>
+                        </ButtonGroup>
 
-                    <!--标签输入框-->
-                    <tagsInput v-if="initItem.type=='tagsInput'" :placeholder="initItem.init"
-                               v-model="FormUI_items[index][indexItem]">
-                    </tagsInput>
+                        <!--单纯上传文件-->
+                        <input type="file" v-if="initItem.type=='file'" @change="processFile($event,index,indexItem)"/>
 
-                    <!--时长选择器-->
-                    <TimePicker v-if="initItem.type=='timePicker'" type="time" v-model="FormUI_items[index][indexItem]"
-                                :placeholder="initItem.init" confirm :disabled="initItem.disabled"></TimePicker>
+                        <!--导入型文件上传 Excel，txt，PDF支持，详细对接人：jadenzhang-->
+                        <importUploader v-if="initItem.type=='importUploader'" :text="initItem.init"
+                                        v-model="FormUI_items[index][indexItem]" :url="initItem.url"
+                                        :list.sync="initItem.list">
+                        </importUploader>
 
-                    <!--标签-->
-                    <div v-if="initItem.type=='tag'" :class="initItem.class">
-                        <Tag v-model="FormUI_items[index][indexItem]" v-for="(domItem, domIndex) in initItem.init"
-                             :key="index+'_'+indexItem+'_'+domIndex">{{domItem.label}}
-                        </Tag>
-                    </div>
+                        <!--标签输入框-->
+                        <tagsInput v-if="initItem.type=='tagsInput'" :placeholder="initItem.init"
+                                   v-model="FormUI_items[index][indexItem]">
+                        </tagsInput>
 
-                    <!--自动填充-->
-                    <AutoComplete2 v-if="initItem.type=='autoComplete'"
-                                   v-model="FormUI_items[index][indexItem]" :placeholder="initItem.init.label"
-                                   :data="initItem.init.data" :disabled="initItem.disabled" :show="initItem.init.show"
-                    ></AutoComplete2>
+                        <!--时长选择器-->
+                        <TimePicker v-if="initItem.type=='timePicker'" type="time"
+                                    v-model="FormUI_items[index][indexItem]"
+                                    :placeholder="initItem.init" confirm :disabled="initItem.disabled"></TimePicker>
 
-                    <FormUIBusiness :type="initItem.type" :allData="FormUI_items[index][indexItem]"
-                                    :index="index"
-                                    :indexItem="indexItem"
-                                    :init="initItem" @update="updateBusiness"></FormUIBusiness>
-                </FormItem>
+                        <!--标签-->
+                        <div v-if="initItem.type=='tag'" :class="initItem.class">
+                            <Tag v-model="FormUI_items[index][indexItem]" v-for="(domItem, domIndex) in initItem.init"
+                                 :key="index+'_'+indexItem+'_'+domIndex">{{domItem.label}}
+                            </Tag>
+                        </div>
+
+                        <!--自动填充-->
+                        <AutoComplete2 v-if="initItem.type=='autoComplete'"
+                                       v-model="FormUI_items[index][indexItem]" :placeholder="initItem.init.label"
+                                       :data="initItem.init.data" :disabled="initItem.disabled"
+                                       :show="initItem.init.show"
+                        ></AutoComplete2>
+
+                        <FormUIBusiness :type="initItem.type" :allData="FormUI_items[index][indexItem]"
+                                        :index="index"
+                                        :indexItem="indexItem"
+                                        :init="initItem" @update="updateBusiness"></FormUIBusiness>
+                    </FormItem>
+                </template>
             </Form>
         </div>
     </Modal>
@@ -330,7 +336,7 @@
                     let rex_length = 0;
                     let defaultMessage = false;
 
-                    function checkLength(value) {
+                    let checkLength = function (value) {
                         rex_length = Number(rule.length);
                         switch (rule.type) {
                             case'length_Max' : {
