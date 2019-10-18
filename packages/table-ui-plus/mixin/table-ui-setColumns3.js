@@ -246,7 +246,6 @@ export default {
                                 }
 
                                 case 'topicContent': {
-                                    console.log('debugger--topicContent');
                                     return self.$loadTableUIComponents(h, {
                                         type: item.UI.type,
                                         value,
@@ -255,7 +254,6 @@ export default {
                                 }
 
                                 default: {
-                                    console.log('debugger2');
                                     return self.$loadTableUIComponents(h, {
                                         type: item.UI.type,
                                         value,
