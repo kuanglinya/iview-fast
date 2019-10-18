@@ -8,6 +8,9 @@ import NavHead from './nav-head.vue';
 import TableUIFullScreen from './table-ui-plus/compontents/table-ui-full-screen.vue';
 import TableOverflowHidden from "./table-ui-plus/compontents/table-ui-overflowHidden.vue";
 import TagsInput from './form-ui/components/tagsInput.vue';
+import DatePicker2 from './form-ui/components/datePicker2.vue';
+import imgUploader from './form-ui/components/imgUploader.vue';
+
 
 //TableUI的render渲染函数对外提供，让普通的TableUI也可以直接使用配置
 import setColumns from './table-ui-plus/mixin/table-ui-setColumns3.js';
@@ -24,7 +27,9 @@ export default {
 
                 TableUIFullScreen,
                 TableOverflowHidden,
-                TagsInput
+                TagsInput,
+                DatePicker2,
+                imgUploader
             }
         });
 

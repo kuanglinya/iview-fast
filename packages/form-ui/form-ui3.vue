@@ -189,6 +189,8 @@
     import imgUploader from './components/imgUploader.vue';
     import numberInput from './components/numberInput.vue';
 
+
+
     export default {
         components: {
             importUploader,
