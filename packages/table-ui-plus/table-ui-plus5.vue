@@ -322,9 +322,14 @@
             //设置数据筛选项相关
             setCollapseValue: function () {
                 //获取当前存储空间字段
-                this.routeName = this.routePath + '/' + this.storageName;
-                this.routeName = this.routeName.split('/');
-                this.routeName = this.routeName.join('_');
+                if (this.$route) {
+                    this.routeName = this.$route.path + '/' + this.storageName;
+                    this.routeName = this.routeName.split('/');
+                    this.routeName = this.routeName.join('_');
+                } else {
+                    this.routeName = '_' + this.storageName;
+                }
+
                 this.routeName = 'TableUIPlus' + this.routeName;
 
                 //根据本地参数情况，判断是否需要使用本地存储

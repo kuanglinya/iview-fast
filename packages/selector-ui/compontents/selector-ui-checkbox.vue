@@ -57,7 +57,6 @@
                 } else {
                     this.routeName = '_' + this.storageName;
                 }
-
                 this.routeName = 'SelectorUI' + this.routeName;
 
                 //根据本地参数情况，判断是否需要使用本地存储
