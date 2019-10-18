@@ -1,6 +1,6 @@
 # iview-fast
 
-项目地址：https://git.code.tencent.com/xiaosi/iview-fast
+项目地址：https://github.com/LittleXiaosi/iview-fast
 
 ## Project setup
 
